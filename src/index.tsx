@@ -1,17 +1,29 @@
-import React from 'react';
+import { createContext } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import AddColorForm from './component/AddColorForm';
+import colors from './data/colordata.json';
+import App from './component/App';
+import { AddColorFormPorp } from './type/proptype';
 
+export const ColorContext = createContext(colors);
+
+// const prop: AddColorFormPorp = {
+//     onNewColor: (title: string, color: string) => {
+//         console.log("the title is " + title);
+//         console.log("the color is " + color);
+//     },
+// };
+
+// ReactDOM.render(
+//     <AddColorForm onNewColor={prop.onNewColor} />,
+//     document.getElementById('root')
+// );
+
+// 状态全部放在根部而一路从根部加属性到节点太不现实，应该使用
+// 上下文钩子。
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <ColorContext.Provider value={colors}>
+        <App />
+    </ColorContext.Provider>,
+    document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
